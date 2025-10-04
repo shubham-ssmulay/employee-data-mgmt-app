@@ -4,7 +4,7 @@
 ## **3️⃣ Root-level README.md**
 
 
-# Employee Manager Fullstack Project
+# Employee Data Management Fullstack Project
 
 ## Overview
 Simple CRUD application for managing employees:
