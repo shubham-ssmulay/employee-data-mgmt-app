@@ -69,11 +69,13 @@ test("shows validation errors for empty form fields", async () => {
   fireEvent.click(screen.getByText("+ Add Employee"));
   fireEvent.click(screen.getByText("Create"));
 
-  // Wait for validation errors
-  expect(await screen.findByText("Name is required")).toBeInTheDocument();
-  expect(await screen.findByText("Email is required")).toBeInTheDocument();
-  expect(await screen.findByText("Position is required")).toBeInTheDocument();
+  await waitFor(() => {
+    expect(screen.getByText("Name is required")).toBeInTheDocument();
+    expect(screen.getByText("Email is required")).toBeInTheDocument();
+    expect(screen.getByText("Position is required")).toBeInTheDocument();
+  });
 });
+
 
 test("closes modal on cancel", async () => {
   render(<App />);

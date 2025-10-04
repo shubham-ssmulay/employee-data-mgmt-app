@@ -6,6 +6,8 @@ from fastapi import FastAPI, Depends, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 from typing import List
+from contextlib import asynccontextmanager
+
 
 from utils.database import create_db_and_tables, get_session
 from models.employee import EmployeeRead, EmployeeCreate, EmployeeUpdate
@@ -14,7 +16,17 @@ from crud.crud import EmployeeCRUD
 # ------------------------
 # Initialize FastAPI
 # ------------------------
-app = FastAPI(title="Employee CRUD API")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info("Starting up API service...")
+    create_db_and_tables()
+
+    yield  # Control is given to FastAPI here
+
+    logger.info("Shutting down...")
+
+app = FastAPI(lifespan=lifespan, title="Employee CRUD API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -23,11 +35,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-@app.on_event("startup")
-def on_startup():
-    logger.info("Starting up API service...")
-    create_db_and_tables()
 
 # ------------------------
 # Router with base path

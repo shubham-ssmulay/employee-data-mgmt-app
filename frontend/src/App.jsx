@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
 
 const API = "/api/employees";
+const POSITION_OPTIONS = [
+  "Software Engineer",
+  "Data Engineer",
+  "ML Engineer",
+  "Quality Analyst",
+  "Solutions Architect",
+  "Sales Representative"
+];
+
 
 export default function App() {
   const [employees, setEmployees] = useState([]);
@@ -193,8 +202,9 @@ export default function App() {
 
             <form onSubmit={onSubmit} className="space-y-3">
               <div>
-                <label className="block font-medium">Name</label>
+                <label className="block font-medium" htmlFor="name">Name</label>
                 <input
+                  id="name"
                   className="border px-2 py-1 w-full rounded"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -203,25 +213,32 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block font-medium">Email</label>
+                <label className="block font-medium" htmlFor="email">Email</label>
                 <input
+                  id="email"
                   className="border px-2 py-1 w-full rounded"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                 />
-                {errors.email && <div className="text-red-500 text-sm">{errors.email}</div>}
+                {errors.email && <div className="text-red-500 text-sm" role="alert">{errors.email}</div>}
               </div>
 
               <div>
-                <label className="block font-medium">Position</label>
-                <input
+                <label className="block font-medium" htmlFor="position">Position</label>
+                <select
+                  id="position"
                   className="border px-2 py-1 w-full rounded"
                   value={form.position}
                   onChange={(e) => setForm({ ...form, position: e.target.value })}
-                />
-                {errors.position && (
-                  <div className="text-red-500 text-sm">{errors.position}</div>
-                )}
+                >
+                  <option value="">-- Select Position --</option>
+                  {POSITION_OPTIONS.map((pos) => (
+                    <option key={pos} value={pos}>
+                      {pos}
+                    </option>
+                  ))}
+                </select>
+                {errors.position && <div className="text-red-500 text-sm" role="alert">{errors.position}</div>}
               </div>
 
               <div className="flex justify-end gap-2 mt-3">
