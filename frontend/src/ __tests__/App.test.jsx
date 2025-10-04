@@ -41,7 +41,7 @@ afterEach(() => {
 test("renders employee table with fetched employees", async () => {
   render(<App />);
 
-  expect(screen.getByText(/Employee Manager/i)).toBeInTheDocument();
+  expect(screen.getByText(/Employee Management System/i)).toBeInTheDocument();
 
   // Wait for table data to appear
   await waitFor(() => {

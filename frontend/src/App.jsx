@@ -89,7 +89,7 @@ export default function App() {
 
   return (
     <div className="p-8 max-w-5xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Employee Manager</h1>
+      <h1 className="text-3xl font-bold mb-6">Employee Management System</h1>
 
       {/* Search + Add button */}
       <div className="mb-4 flex gap-2">
