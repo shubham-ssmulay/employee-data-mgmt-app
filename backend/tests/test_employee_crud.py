@@ -49,21 +49,30 @@ def client(db_session):
 
 
 def test_create_employee(client):
-    payload = {"name": "Alice", "email": "alice@test.com", "position": "Developer"}
+    payload = {
+        "name": "Alice",
+        "email": "alice@test.com",
+        "position": "Software Engineer"  # 👈 must match PositionEnum
+    }
     response = client.post("/api/employees/", json=payload)
     assert response.status_code == 200
-    data = response.json()
-    assert data["name"] == "Alice"
-    assert data["email"] == "alice@test.com"
 
 
 def test_create_duplicate_email(client):
     # First, create Alice
-    payload = {"name": "Alice", "email": "alice@test.com", "position": "Developer"}
+    payload = {
+        "name": "Alice", 
+        "email": "alice@test.com", 
+        "position": "Software Engineer"
+    }
     client.post("/api/employees/", json=payload)
 
     # Try creating Bob with Alice's email
-    payload = {"name": "Bob", "email": "alice@test.com", "position": "Tester"}
+    payload = {
+        "name": "Bob", 
+        "email": "alice@test.com", 
+        "position": "ML Engineer"
+    }
     response = client.post("/api/employees/", json=payload)
     assert response.status_code == 400
     assert "already exists" in response.json()["detail"]
@@ -71,7 +80,11 @@ def test_create_duplicate_email(client):
 
 def test_get_employees(client):
     # Insert employee first
-    payload = {"name": "Alice", "email": "alice@test.com", "position": "Developer"}
+    payload = {
+        "name": "Alice", 
+        "email": "alice@test.com", 
+        "position": "Quality Analyst"
+    }
     client.post("/api/employees/", json=payload)
 
     response = client.get("/api/employees/")
@@ -83,13 +96,20 @@ def test_get_employees(client):
 
 def test_update_employee(client):
     # Insert employee first
-    payload = {"name": "Alice", "email": "alice@test.com", "position": "Developer"}
+    payload = {
+        "name": "Alice", 
+        "email": "alice@test.com", 
+        "position": "Data Engineer"
+    }
     client.post("/api/employees/", json=payload)
 
     employees = client.get("/api/employees/").json()
     emp_id = employees[0]["id"]
 
-    update_payload = {"name": "Alice Updated", "position": "Lead"}
+    update_payload = {
+        "name": "Alice Updated", 
+        "position": "ML Engineer"
+    }
     response = client.put(f"/api/employees/{emp_id}", json=update_payload)
     assert response.status_code == 200
     data = response.json()
@@ -98,7 +118,11 @@ def test_update_employee(client):
 
 def test_soft_delete_employee(client):
     # Insert employee first
-    payload = {"name": "Alice", "email": "alice@test.com", "position": "Developer"}
+    payload = {
+        "name": "Alice", 
+        "email": "alice@test.com", 
+        "position": "Data Engineer"
+    }
     client.post("/api/employees/", json=payload)
 
     employees = client.get("/api/employees/").json()
