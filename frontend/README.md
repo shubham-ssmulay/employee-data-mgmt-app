@@ -1,30 +1,44 @@
----
+# 📘 Employee Management System – Frontend
 
-## **2️⃣ frontend/README.md**
-
-```markdown
-# Employee Manager Frontend
-
-## Overview
-Frontend for Employee Manager using **React**, **Vite**, and **Tailwind CSS**.
+This is the **frontend** for the Employee Management System, built using **React**, **Vite**, and **Tailwind CSS**.
 
 ---
 
-## Requirements
-- Node.js 18+  
-- npm or yarn
+## 🚀 Features
+
+- Add, edit, soft-delete, and restore employees.
+- Search employees by name.
+- Client-side form validation with error handling.
+- Responsive and clean UI using Tailwind CSS.
+
+---
+
+## ⚙️ Requirements
+
+- **Node.js** v18 or later  
+- **npm** or **yarn**
 
 ---
 
 ## Directory Structure
 ```
-frontend/
-├── src/
-│ ├── App.jsx
-│ ├── main.jsx
-│ └── index.css
-├── vite.config.js
-└── package.json
+frontend
+├── README.md
+├── babel.config.js
+├── index.html
+├── jest.config.js
+├── package-lock.json
+├── package.json
+├── postcss.config.cjs
+├── src
+│   ├──  __tests__
+│   │   └── App.test.jsx
+│   ├── App.jsx
+│   ├── index.css
+│   ├── main.jsx
+│   └── setupTests.js
+├── tailwind.config.cjs
+└── vite.config.js
 ```
 
 ---
@@ -35,13 +49,13 @@ cd frontend
 npm install
 ```
 
-## Run Frontend
+## ▶️ Run the App (Development)
 ```npm run dev```
 
 Default port: `5173`
 
-Navigate to this URL - 
+Open your browser at - http://localhost:5173/
 
-```
-http://localhost:5173/
-```
+## Run Tests
+
+```npm test```
