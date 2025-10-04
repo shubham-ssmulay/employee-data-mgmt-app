@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
 
 const API = "/api/employees";
+const POSITION_OPTIONS = [
+  "Software Engineer",
+  "Data Engineer",
+  "ML Engineer",
+  "Quality Analyst",
+  "Solutions Architect",
+  "Sales Representative"
+];
+
 
 export default function App() {
   const [employees, setEmployees] = useState([]);
@@ -216,12 +225,19 @@ export default function App() {
 
               <div>
                 <label className="block font-medium" htmlFor="position">Position</label>
-                <input
+                <select
                   id="position"
                   className="border px-2 py-1 w-full rounded"
                   value={form.position}
                   onChange={(e) => setForm({ ...form, position: e.target.value })}
-                />
+                >
+                  <option value="">-- Select Position --</option>
+                  {POSITION_OPTIONS.map((pos) => (
+                    <option key={pos} value={pos}>
+                      {pos}
+                    </option>
+                  ))}
+                </select>
                 {errors.position && <div className="text-red-500 text-sm" role="alert">{errors.position}</div>}
               </div>
 
