@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # =========================
-# Employee Manager Fullstack
+# Employee Management System Fullstack
 # Runs Backend (FastAPI) + Frontend (Vite) concurrently
 # =========================
 
